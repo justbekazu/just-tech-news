@@ -5,37 +5,33 @@ class Comment extends Model {}
 
 Comment.init(
   {
-
     id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      user_id: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-          references: {
-            model: 'user',
-            key: 'id'
-          }
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     },
-     post_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'post',
-          key: 'id'
-        }
+    comment_text: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
       }
-      pcomment_text: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'comment',
-          key: 'id'
-        }
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id'
       }
-
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'post',
+        key: 'id'
+      }
+    }
   },
   {
     sequelize,
@@ -45,4 +41,4 @@ Comment.init(
   }
 );
 
-module.exports = {User, Post, Vote, Comment };
+module.exports = Comment;
